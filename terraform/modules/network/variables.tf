@@ -1,41 +1,34 @@
 variable "location" {
-  description = "Azure region for all resources"
+  description = "Azure region"
   type        = string
-  default     = "Germany West Central"
 }
 
 variable "resource_group_name" {
-  description = "Name of the Resource Group"
+  description = "Resource Group name"
   type        = string
-  default     = "rg-iac-learning"
 }
 
 variable "vnet_name" {
   description = "Name of the Virtual Network"
   type        = string
-  default     = "vnet-iac-learning"
 }
 
 variable "nsg_name" {
   description = "Name of the Network Security Group"
   type        = string
-  default     = "nsg-iac-learning"
 }
 
 variable "address_space" {
   description = "Address space for the Virtual Network"
   type        = list(string)
-  default     = ["10.0.0.0/16"]
 }
 
 variable "public_subnet_prefix" {
   description = "Address prefix for the public subnet"
   type        = list(string)
-  default     = ["10.0.1.0/24"]
 }
 
 variable "private_subnet_prefix" {
   description = "Address prefix for the private subnet"
   type        = list(string)
-  default     = ["10.0.2.0/24"]
 }

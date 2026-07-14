@@ -105,6 +105,7 @@ terraform/
         ├── main.tf
         ├── variables.tf
         └── outputs.tf
+```
 
 # Phase 3 – CI/CD Automation with GitHub Actions
 

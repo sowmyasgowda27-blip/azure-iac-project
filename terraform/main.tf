@@ -9,10 +9,10 @@ module "network" {
   location            = var.location
   resource_group_name = azurerm_resource_group.learning.name
 
-  vnet_name            = var.vnet_name
-  nsg_name             = var.nsg_name
+  vnet_name = var.vnet_name
+  nsg_name  = var.nsg_name
 
-  address_space        = var.address_space
-  public_subnet_prefix = var.public_subnet_prefix
+  address_space         = var.address_space
+  public_subnet_prefix  = var.public_subnet_prefix
   private_subnet_prefix = var.private_subnet_prefix
 }

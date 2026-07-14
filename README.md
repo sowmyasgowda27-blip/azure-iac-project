@@ -105,4 +105,45 @@ terraform/
         ├── main.tf
         ├── variables.tf
         └── outputs.tf
-```
+
+# Phase 3 – CI/CD Automation with GitHub Actions
+
+## Overview
+
+In this phase, Continuous Integration (CI) was introduced using GitHub Actions to automate the validation of Terraform code. The workflow ensures that infrastructure changes are checked for formatting, validated, and planned automatically before deployment.
+
+## Objectives
+
+- Implement CI using GitHub Actions
+- Automate Terraform validation
+- Enforce consistent code formatting
+- Detect configuration issues before deployment
+- Improve the Infrastructure as Code development workflow
+
+## Workflow
+
+The GitHub Actions workflow runs automatically on every push and pull request and performs the following steps:
+
+1. Checkout the repository
+2. Set up Terraform
+3. Initialize Terraform
+4. Run `terraform fmt -check`
+5. Run `terraform validate`
+6. Run `terraform plan`
+
+## Skills Demonstrated
+
+- GitHub Actions
+- CI/CD fundamentals
+- Terraform automation
+- YAML workflow configuration
+- Infrastructure as Code (IaC)
+- Version control best practices
+
+## Outcome
+
+The project now includes an automated CI pipeline that validates Terraform configurations before deployment, improving code quality, consistency, and reliability.
+
+## Screenshots
+
+> Screenshots will be added after the project is completed.

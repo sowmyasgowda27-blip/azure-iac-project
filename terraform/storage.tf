@@ -15,3 +15,12 @@ resource "azurerm_storage_container" "tfstate" {
   storage_account_id    = azurerm_storage_account.tfstate.id
   container_access_type = "private"
 }
+
+terraform {
+  backend "azurerm" {
+    resource_group_name  = "rg-iac-learning"
+    storage_account_name = "stgiaclearning2026"
+    container_name       = "tfstate"
+    key                  = "terraform.tfstate"
+  }
+}

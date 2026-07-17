@@ -2,149 +2,250 @@
 
 ## Project Overview
 
-This project showcases my hands-on learning and implementation of **Infrastructure as Code (IaC)** using **Terraform** on **Microsoft Azure**.
+I created this project to understand how Infrastructure as Code (IaC) is developed and managed using Terraform on Microsoft Azure.
 
-The objective is to provision, manage, and maintain Azure infrastructure entirely through code instead of using the Azure Portal. Throughout this project, I apply Terraform best practices such as reusable configurations, modular design, state management, and version control with Git and GitHub while building a secure and maintainable cloud environment.
+Rather than building a large production environment, this project focuses on the engineering practices behind Infrastructure as Code. It demonstrates how Terraform, Git, GitHub, GitHub Actions, remote state management, and secure authentication work together to manage cloud infrastructure using industry-standard workflows.
 
-This repository serves as a practical cloud infrastructure project and documents my learning journey in Azure, Terraform, and Infrastructure as Code.
-
----
-
-## Technologies Used
-
-* Microsoft Azure
-* Terraform
-* Azure CLI
-* Git
-* GitHub
+As my understanding grew, I refined this learning project into a portfolio project to showcase the practical skills and workflows I gained throughout the journey.
 
 ---
 
-## Learning Objectives
+## Project Objectives
 
-* Provision Azure infrastructure using Terraform.
-* Understand Infrastructure as Code (IaC) principles.
-* Build reusable and maintainable Terraform configurations.
-* Implement Terraform modules and state management.
-* Practice version control using Git and GitHub.
-* Develop practical cloud infrastructure skills through a real-world project.
-
----
-
-## Completed Phases
-
-### ✅ Phase 1 – Azure Infrastructure Foundation
-
-**Objective**
-
-Build the foundational Azure networking infrastructure using Terraform.
-
-**Resources Created**
-
-* Azure Resource Group
-* Azure Virtual Network (VNet)
-* Public Subnet
-* Private Subnet
-* Network Security Group (NSG)
-* NSG Association with the Public Subnet
-
-**Terraform Concepts Learned**
-
-* Provider configuration
-* Resource blocks
-* Terraform initialization
-* Planning and applying infrastructure
-* Resource dependencies
-* Variables
-* Outputs
-
-**Outcome**
-
-Successfully provisioned the complete Azure networking foundation using Infrastructure as Code.
+- Learn Infrastructure as Code (IaC) using Terraform
+- Understand how Terraform manages cloud infrastructure
+- Build a modular and maintainable Terraform project
+- Learn Git and GitHub workflows for infrastructure development
+- Automate Terraform validation using GitHub Actions
+- Configure secure remote state management
+- Implement secure authentication between GitHub Actions and Azure
+- Apply foundational infrastructure security practices
 
 ---
 
-### ✅ Phase 2 – Refactoring with Terraform Modules
+## Table of Contents
 
-**Objective**
-
-Refactor the networking resources into a reusable Terraform module without recreating the existing Azure infrastructure.
-
-**Changes Implemented**
-
-* Created a reusable `network` module.
-* Moved networking resources from the root module into the child module.
-* Passed deployment values from the root module to the child module.
-* Migrated Terraform state using `terraform state mv` to preserve the existing Azure resources.
-
-**Terraform Concepts Learned**
-
-* Terraform Modules
-* Root Module vs Child Module
-* Module inputs
-* Terraform State
-* State migration
-* Infrastructure refactoring
-
-**Outcome**
-
-Successfully reorganized the Terraform project into a modular structure while preserving the deployed Azure infrastructure. The final Terraform plan confirmed that the infrastructure matched the updated configuration with no pending changes.
+- [Project Overview](#project-overview)
+- [Project Objectives](#project-objectives)
+- [Architecture](#architecture)
+- [Infrastructure as Code Workflow](#infrastructure-as-code-workflow)
+- [Infrastructure Components](#infrastructure-components)
+- [Terraform Project Organization](#terraform-project-organization)
+- [Security Implementation](#security-implementation)
+- [CI/CD Pipeline](#cicd-pipeline)
+- [Git & GitHub Workflow](#git--github-workflow)
+- [Repository Structure](#repository-structure)
+- [Deployment Guide](#deployment-guide)
+- [Lessons Learned](#lessons-learned)
+- [Future Improvements](#future-improvements)
 
 ---
 
-## Project Structure
+## Architecture
+
+The project provisions a foundational Azure infrastructure using Terraform. The infrastructure is intentionally minimal and focuses on demonstrating Infrastructure as Code engineering practices rather than deploying production workloads.
+
+### Architecture Components
+
+- Resource Group
+- Virtual Network (VNet)
+- Public Subnet
+- Private Subnet
+- Network Security Group (NSG)
+- Azure Storage Account for Terraform Remote State
+- Azure Storage Container for Terraform State File
+
+## Infrastructure as Code Workflow
+
+This diagram illustrates how infrastructure changes flow from development through validation and provisioning in Azure.
+
+![Infrastructure as Code Workflow](docs/images/iac-workflow.png)
+
+---
+
+## Infrastructure Components
+
+### Resource Group
+A dedicated Azure Resource Group is used to logically organize and manage all resources created for this project.
+
+### Virtual Network (VNet)
+A Virtual Network provides network isolation and serves as the foundation for communication between Azure resources.
+
+### Public and Private Subnets
+The Virtual Network is divided into public and private subnets to demonstrate network segmentation and support secure infrastructure design.
+
+### Network Security Group (NSG)
+A Network Security Group controls inbound network traffic using security rules based on the principle of least privilege.
+
+### Azure Storage Account
+A secure Azure Storage Account is used to store the Terraform remote state, enabling centralized and consistent infrastructure management.
+
+### Terraform Remote State
+The Terraform state file is stored remotely in an Azure Storage Container instead of locally, supporting collaboration and preventing state inconsistencies.
+
+---
+
+### Deployed Azure Resources
+
+The following screenshot shows the Azure resources provisioned through Terraform.
+
+![Azure Resources](docs/images/resource-group.png)
+
+---
+
+## Terraform Project Organization
+
+This project is organized to demonstrate how Terraform configurations can be structured for readability, maintainability, and scalability.
+
+During the project, I learned how Terraform projects are organized using modules, variables, outputs, and separate configuration files. Rather than focusing on writing complex Terraform code, the emphasis was on understanding how infrastructure is defined, managed, and maintained using Infrastructure as Code principles.
+
+### Project Organization
+
+- Reusable Terraform modules
+- Input variables for configurable deployments
+- Output values for important infrastructure information
+- Separate configuration files for improved organization
+- Remote Terraform state stored in Azure Storage
+
+---
+
+## Git & GitHub Workflow
+
+This project follows a Git-based workflow commonly used in collaborative software and Infrastructure as Code development.
+
+Rather than making changes directly to the main branch, infrastructure updates were developed in feature branches, validated locally, and then submitted through Pull Requests before being merged into the main branch.
+
+This approach helped me understand how infrastructure changes are reviewed, tested, and managed before becoming part of the main codebase.
+
+### Workflow
+
+1. Create a feature branch
+2. Develop and test changes locally
+3. Run Terraform formatting and validation
+4. Commit and push changes to GitHub
+5. Open a Pull Request
+6. Run automated GitHub Actions validation
+7. Merge into the main branch
+
+---
+
+## CI/CD Pipeline
+
+This project uses GitHub Actions to automatically validate Terraform configurations whenever changes are pushed to the repository.
+
+The purpose of the pipeline is to identify formatting issues, configuration errors, and infrastructure changes before they are merged into the main branch.
+
+Running these checks automatically helps maintain code quality and reduces the risk of introducing errors into the infrastructure.
+
+### Automated Validation
+
+- Terraform initialization (`terraform init`)
+- Terraform formatting check (`terraform fmt -check`)
+- Terraform configuration validation (`terraform validate`)
+- Terraform execution plan (`terraform plan`)
+
+### GitHub Actions Workflow
+
+The GitHub Actions workflow automatically validates Terraform configurations whenever changes are pushed to the repository.
+
+![GitHub Actions Workflow](docs/images/github-actions-success.png)
+
+---
+
+## Security Implementation
+
+Security was incorporated throughout the project by applying foundational Infrastructure as Code security practices rather than adding security as a final step.
+
+The project focuses on protecting infrastructure configuration, authentication, and state management while following secure development workflows.
+
+### Security Measures
+
+- Network Security Group (NSG) configured using the principle of least privilege
+- Terraform remote state stored in a dedicated Azure Storage Account
+- HTTPS-only access enabled for the Storage Account
+- Public blob access disabled for Terraform state storage
+- Secure authentication between GitHub Actions and Azure using GitHub Secrets
+- Sensitive credentials excluded from the source code repository
+
+---
+
+## Repository Structure
 
 ```text
-terraform/
-├── main.tf
-├── provider.tf
-├── variables.tf
-├── outputs.tf
-└── modules/
-    └── network/
-        ├── main.tf
-        ├── variables.tf
-        └── outputs.tf
+azure-iac-project/
+│
+├── .github/
+│   └── workflows/
+│       └── terraform.yml
+│
+├── terraform/
+│   ├── modules/
+│   │   └── network/
+│   ├── backend.hcl
+│   ├── main.tf
+│   ├── provider.tf
+│   ├── variables.tf
+│   ├── outputs.tf
+│   ├── storage.tf
+│   └── terraform.tfvars
+│
+├── .gitignore
+└── README.md
 ```
 
-# Phase 3 – CI/CD Automation with GitHub Actions
+---
 
-## Overview
+## Deployment Guide
 
-In this phase, Continuous Integration (CI) was introduced using GitHub Actions to automate the validation of Terraform code. The workflow ensures that infrastructure changes are checked for formatting, validated, and planned automatically before deployment.
+### Prerequisites
 
-## Objectives
+- Azure Subscription
+- Terraform installed
+- Azure CLI installed
+- Git installed
+- GitHub account
 
-- Implement CI using GitHub Actions
-- Automate Terraform validation
-- Enforce consistent code formatting
-- Detect configuration issues before deployment
-- Improve the Infrastructure as Code development workflow
+### Deployment Steps
 
-## Workflow
+1. Clone the repository.
+2. Configure the Terraform backend.
+3. Authenticate to Azure.
+4. Initialize Terraform.
+5. Validate the Terraform configuration.
+6. Review the Terraform execution plan.
+7. Apply the infrastructure.
 
-The GitHub Actions workflow runs automatically on every push and pull request and performs the following steps:
+### Terraform Commands
 
-1. Checkout the repository
-2. Set up Terraform
-3. Initialize Terraform
-4. Run `terraform fmt -check`
-5. Run `terraform validate`
-6. Run `terraform plan`
+```bash
+terraform init
+terraform validate
+terraform plan
+terraform apply
+```
 
-## Skills Demonstrated
+---
 
-- GitHub Actions
-- CI/CD fundamentals
-- Terraform automation
-- YAML workflow configuration
-- Infrastructure as Code (IaC)
-- Version control best practices
+## Lessons Learned
 
-## Outcome
+Before starting this project, I had very little understanding of how Infrastructure as Code was developed and managed in real-world environments.
 
-The project now includes an automated CI pipeline that validates Terraform configurations before deployment, improving code quality, consistency, and reliability.
+Through this hands-on project, I learned how Git, GitHub, Terraform, GitHub Actions, and Azure work together to build and manage cloud infrastructure using industry-standard workflows. I gained practical experience with feature branches, Pull Requests, CI/CD validation, secure authentication, remote state management, and collaborative infrastructure development.
 
-## Screenshots
+One of the biggest lessons was understanding how scalable Infrastructure as Code can be. Adding, modifying, or removing cloud infrastructure becomes a controlled, repeatable, and efficient process by simply updating the Terraform configuration.
 
-> Screenshots will be added after the project is completed.
+More importantly, this project helped me understand how these technologies complement each other to create a secure, automated, and maintainable infrastructure workflow. It transformed many concepts that once felt abstract into practical skills that I can continue to build upon.
+
+---
+
+## Future Improvements
+
+This project was intentionally kept focused on learning Infrastructure as Code (IaC) engineering practices. If I continue expanding it, the following enhancements would be valuable:
+
+- Deploy Azure Virtual Machines to host application workloads.
+- Store sensitive values securely using Azure Key Vault.
+- Extend the GitHub Actions pipeline to support automated infrastructure deployments.
+- Implement monitoring and alerting with Azure Monitor.
+- Enhance network security with additional NSG rules and private connectivity where appropriate.
+- Deploy additional Azure services while maintaining a modular Terraform design.
+
